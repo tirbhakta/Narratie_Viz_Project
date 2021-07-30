@@ -1,4 +1,4 @@
-function aggregate(json_array, country){
+function aggregate(json_array){
     
 	var total_confirmed = 0
 	var total_recovered = 0
@@ -15,11 +15,11 @@ function aggregate(json_array, country){
 
 function worldRace(all){
     //Using this selection to update the SVG everytime the function is called
-    d3.selectAll('#worldRace').selectAll('*').remove()
+    //d3.selectAll('#worldRace').selectAll('*').remove()
 
-    d3.csv("https://github.com/tirbhakta/Narrative_Viz_Project/blob/e31a339a05e4eb3ea739d72847a70238aab8a0d1/World_Covid_Data.csv", function(data) {
+    d3.csv("https://raw.githubusercontent.com/tirbhakta/Narrative_Viz_Project/e31a339a05e4eb3ea739d72847a70238aab8a0d1/World_Covid_Data.csv", function(data) {
         
-        var aggregation = aggregate(data, country)
+        var aggregation = aggregate(data)
         console.log(aggregation)
 
         // set the dimensions and margins of the graph
