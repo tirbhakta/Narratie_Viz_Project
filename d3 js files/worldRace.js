@@ -1,32 +1,23 @@
 function aggregate(json_array, country){
-    console.log(country)
-    if(country == 'all'){
-        var total_confirmed = 0
-        var total_recovered = 0
-        var total_deaths = 0
-        for(i=0; i<json_array.length;i++){
-            total_confirmed += parseInt(json_array[i]['total_confirmed']);
-            total_recovered += parseInt(json_array[i]['total_recovered']);
-            total_deaths += parseInt(json_array[i]['deaths']);
-        }
-        var total_active = total_confirmed - total_recovered - total_deaths;
-        return [total_confirmed, total_recovered, total_deaths, total_active];
-    }
-    else{
-        for(i=0; i<json_array.length; i++){
-            if(json_array[i]['location'] == country){
-                return [json_array[i]['total_confirmed'], json_array[i]['total_recovered'], json_array[i]['total_deaths'], json_array[i]['active_cases']]
-            }
-        }
-    }
+    
+	var total_confirmed = 0
+	var total_recovered = 0
+	var total_deaths = 0
+	for(i=0; i<json_array.length;i++){
+		total_confirmed += parseInt(json_array[i]['total_confirmed']);
+		total_recovered += parseInt(json_array[i]['total_recovered']);
+		total_deaths += parseInt(json_array[i]['total_deaths']);
+	}
+	var total_active = total_confirmed - total_recovered - total_deaths;
+	return [total_confirmed, total_recovered, total_deaths, total_active];    
 }
 
 
-function worldRace(country){
-        //Using this selection to update the SVG everytime the function is called
+function worldRace(all){
+    //Using this selection to update the SVG everytime the function is called
     d3.selectAll('#worldRace').selectAll('*').remove()
 
-    d3.csv("../World_Covid_Data.xlsx", function(data) {
+    await d3.csv("./World_Covid_Data.xlsx", function(data) {
         
         var aggregation = aggregate(data, country)
         console.log(aggregation)
@@ -46,7 +37,7 @@ function worldRace(country){
                     "translate(" + margin.left + "," + margin.top + ")");
 
         // X axis
-        var domain_array = ['Confirmed Cases', 'Recovered Cases', 'Deaths', 'Active Cases'];
+        var domain_array = ['Confirmed Cases', 'Recovered Cases', 'Covid Deaths', 'Active Cases'];
         var colors = ["rgb(171, 250, 98)", "rgb(251, 222, 89)", "rgb(151, 250, 162)", "rgb(138, 251, 201)"]
         var x = d3.scaleBand()
             .range([ 0, width ])
@@ -109,13 +100,9 @@ function worldRace(country){
             .enter()
             .append('text')
             .text(function(d){
-                if(country == 'all'){
                     return 'World COVID-19 Statistics'
-                }
-                else{
-                    return `COVID-19 ${country}`
-                }
-            })
+                }               
+            )
             .attr('x', width/12)
             .attr('y', 0.05*height)
             .style('fill','white')
