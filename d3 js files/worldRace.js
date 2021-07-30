@@ -12,6 +12,9 @@ function aggregate(json_array){
 	return [total_confirmed, total_recovered, total_deaths, total_active];    
 }
 
+function formatNumberWithComma(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 
 function worldRace(all){
     //Using this selection to update the SVG everytime the function is called
@@ -88,7 +91,7 @@ function worldRace(all){
             .enter()
             .append('text')
             .text(function(d,i){
-                return numberWithCommas(aggregation[i]);
+                return formatNumberWithComma(aggregation[i]);
             })
             .style('fill','white')
             .attr('x', function(d,i){ return x(domain_array[i]) + 10})
