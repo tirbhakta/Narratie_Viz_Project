@@ -54,7 +54,7 @@ function worldRace(all){
             .attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "end")
             .style('fill', 'white')
-            .style('stroke-width',0.5);
+            .style('stroke-width',0.05);
 
         // Add Y axis
         var y = d3.scaleLinear()
@@ -73,7 +73,7 @@ function worldRace(all){
             .attr("stroke", function(d,i){
                 return colors[i]
             })
-            .style('stroke-width', 5);
+            .style('stroke-width', 10);
 
         // Circles
         svg.selectAll("mycircle")
@@ -96,7 +96,7 @@ function worldRace(all){
             .style('fill','white')
             .attr('x', function(d,i){ return x(domain_array[i]) + 10})
             .attr('y', function(d,i){ return y(aggregation[i])})
-            .style('font-size', 0.005*width + 'px');
+            .style('font-size', 0.0005*width + 'px');
 
         svg.selectAll('body')
             .data(['text'])
@@ -109,7 +109,7 @@ function worldRace(all){
             .attr('x', width/12)
             .attr('y', 0.005*height)
             .style('fill','white')
-            .style('font-size', 0.007*width + 'px');
+            .style('font-size', 0.0007*width + 'px');
         
 
     });
