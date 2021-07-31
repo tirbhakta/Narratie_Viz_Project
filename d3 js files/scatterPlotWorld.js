@@ -60,7 +60,7 @@ function scatterPlotWorld(){
 	  
 		  // Add X axis
 	  	var x = d3.scaleLog()
-	    	.domain([10, 1000000])
+	    	.domain([10, 100000000])
 	    	.range([ 0, width ]);
 	  	svg.append("g")
 	    	.attr("transform", "translate(0," + height + ")")
@@ -69,7 +69,7 @@ function scatterPlotWorld(){
 
 	  	// Add Y axis
 	  	var y = d3.scaleLog()
-	    	.domain([10, 1000000])
+	    	.domain([10, 100000000])
 	    	.range([ height, 0]);
 	  	svg.append("g")
 	    	.call(d3.axisLeft(y))
@@ -112,7 +112,7 @@ function scatterPlotWorld(){
 		  	div.transition()
 		       .duration(100)
 		       .style("opacity", 1);
-		  	div.html(d.location)
+		  	div.html(d.location + d.total_confirmed + total_recovered)
 		       .style("left", (d3.event.pageX + 10) + "px")
 		       .style("top", (d3.event.pageY - 15) + "px");
 	     	})  
