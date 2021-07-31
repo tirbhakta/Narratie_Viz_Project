@@ -55,7 +55,8 @@ function scatterPlotWorld(){
 	      	.text("Total Affected");
 			
 		// set color scale
-		var color = d3.scaleOrdinal(d3.schemeCategory40);
+		//var color = d3.scaleOrdinal(d3.schemeCategory40);
+		var color = d3.scaleOrdinal().domain(d.location).range(d3.schemeSet3);
 		
 		// Add dots
   		svg.append('g')
@@ -66,7 +67,7 @@ function scatterPlotWorld(){
 	      	.attr("cx", function (d) { return x(d.total_recovered); } )
 	      	.attr("cy", function (d) { return y(d.total_confirmed); } )
 	      	.attr("r", 4.5)
-	      	.style("fill", function(d,i) { return color(d.location); })		
+	      	.style("fill", function(d) { return color(d); })		
 		// Add label on mouse-hover
 		.on('mouseover', function (d, i) {
 			d3.select(this).transition()
