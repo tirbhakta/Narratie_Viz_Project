@@ -64,16 +64,15 @@ function worldSummary(){
         .data(aggregation)
         .enter()
         .append("rect")
-            .attr("x", function(d,i) { return x(domain_array[i]); })
-            //.attr("x2", function(d,i) { return x(domain_array[i]); })
-            .attr("y", function(d,i) { return y(aggregation[i]); })
-            //.attr("y2", y(0))
+            .attr("x1", function(d,i) { return x(domain_array[i]); })
+            .attr("x2", function(d,i) { return x(domain_array[i]); })
+            .attr("y1", function(d,i) { return y(aggregation[i]); })
+            .attr("y2", y(0))
 		.attr("width", x.bandwidth())
 		.attr("height", function(d) { return height - y(d.Value); })
             .attr("fill", function(d,i){
                 return colors[i]
-            })
-            .style('stroke-width', 20);
+            });
 
         // Circles
         svg.selectAll("mycircle")
@@ -93,9 +92,8 @@ function worldSummary(){
             .text(function(d,i){
                 return formatNumberWithComma(aggregation[i]);
             });
-            //.style('fill','white')
-            //.attr('x', function(d,i){ return x(domain_array[i])})
-            //.attr('y', function(d,i){ return y(aggregation[i])})
-            //.style('font-size', 0.002*width + 'px');
+            .style('fill','white')
+            .attr('x', function(d,i){ return x(domain_array[i])})
+            .attr('y', function(d,i){ return y(aggregation[i])});
     });
 }
