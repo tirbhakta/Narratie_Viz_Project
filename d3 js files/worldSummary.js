@@ -49,7 +49,7 @@ function worldSummary(){
         .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "end")
-            .style('fill', 'white');
+            .style('fill', 'blue');
 
         // Add Y axis
         var y = d3.scaleLinear()
