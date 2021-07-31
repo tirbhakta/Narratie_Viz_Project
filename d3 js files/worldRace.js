@@ -93,9 +93,9 @@ function worldRace(all){
                 return formatNumberWithComma(aggregation[i]);
             })
             .style('fill','white')
-            .attr('x', function(d,i){ return x(domain_array[i]) + 10})
+            .attr('x', function(d,i){ return x(domain_array[i])})
             .attr('y', function(d,i){ return y(aggregation[i])})
-            .style('font-size', 0.05*width + 'px');
+            .style('font-size', 0.02*width + 'px');
 
     });
 }
