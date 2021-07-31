@@ -49,7 +49,7 @@ function worldSummary(){
         .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "end")
-            .style('fill', 'blue');
+            .style('fill', 'black');
 
         // Add Y axis
         var y = d3.scaleLinear()
@@ -60,7 +60,7 @@ function worldSummary(){
 		.call(d3.axisLeft(y));
 
         // Bars
-        svg.selectAll("mybar")
+        svg.selectAll("myline")
         .data(aggregation)
         .enter()
         .append("line")
@@ -82,7 +82,7 @@ function worldSummary(){
             .attr("cy", function(d,i) { return y(aggregation[i]); })
             .attr("r", "8")
             .style("fill", "#69b3a2")
-            .attr("stroke", "black");
+            .attr("stroke", "red");
 
         svg.selectAll('body')
             .data(aggregation)
@@ -91,7 +91,7 @@ function worldSummary(){
             .text(function(d,i){
                 return formatNumberWithComma(aggregation[i]);
             })
-            .style('fill','black')
+            .style('fill','blue')
             .attr('x', function(d,i){ return x(domain_array[i])})
             .attr('y', function(d,i){ return y(aggregation[i])});
     });
