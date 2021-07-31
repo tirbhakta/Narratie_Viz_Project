@@ -17,26 +17,23 @@ function formatNumberWithComma(x) {
 }
 
 function worldSummary(){
-    //Using this selection to update the SVG everytime the function is called
-    d3.selectAll('#worldSummary').selectAll('*').remove()
+	
+	var margin = {top: 30, right: 30, bottom: 70, left: 60},
+    width = 460 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
 
+	// append the svg object to the body of the page
+	var svg = d3.select("#barplotDiv")
+	  .append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+			  
+	// read data from csv
     d3.csv("https://raw.githubusercontent.com/tirbhakta/Narrative_Viz_Project/e31a339a05e4eb3ea739d72847a70238aab8a0d1/World_Covid_Data.csv", function(data) {
         
-        var aggregation = aggregate(data)
-
-        // set the dimensions and margins of the graph
-        var margin = {top: 10, right: 30, bottom: 0, left: 30},
-            width = document.getElementById('worldRaceDiv').offsetWidth - margin.left - margin.right,
-            height = document.getElementById('worldRaceDiv').offsetHeight*0.8 - margin.top - margin.bottom;
-
-        // append the svg object to the body of the page
-        var svg = d3.selectAll("#worldSummary")
-            .append("svg")
-                .attr("width", document.getElementById('worldRaceDiv').offsetWidth + margin.left + margin.right)
-                .attr("height", document.getElementById('worldRaceDiv').offsetHeight*1.2 + margin.top + margin.bottom)
-            .append("g")
-                .attr("transform",
-                    "translate(" + margin.left + "," + margin.top + ")");
+        var aggregation = aggregate(data)        
 
         // X axis
         var domain_array = ['Confirmed', 'Recovered', 'Deaths', 'Active'];
@@ -52,24 +49,27 @@ function worldSummary(){
         .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "end")
-            .style('fill', 'white')
-            .style('stroke-width',1.0)
-	    .style('font-size',"10px");
+            .style('fill', 'white');
 
         // Add Y axis
         var y = d3.scaleLinear()
             .domain([0, aggregation[0]])
-            .range([ height, 90]);
+            .range([ height, 0]);
+		
+		svg.append("g")
+		.call(d3.axisLeft(y));
 
-        // Lines
-        svg.selectAll("myline")
+        // Bars
+        svg.selectAll("mybar")
         .data(aggregation)
         .enter()
-        .append("line")
-            .attr("x1", function(d,i) { return x(domain_array[i]); })
-            .attr("x2", function(d,i) { return x(domain_array[i]); })
-            .attr("y1", function(d,i) { return y(aggregation[i]); })
-            .attr("y2", y(0))
+        .append("rect")
+            .attr("x", function(d,i) { return x(domain_array[i]); })
+            //.attr("x2", function(d,i) { return x(domain_array[i]); })
+            .attr("y", function(d,i) { return y(aggregation[i]); })
+            //.attr("y2", y(0))
+			.attr("width", x.bandwidth())
+			.attr("height", function(d) { return height - y(d.Value); })
             .attr("stroke", function(d,i){
                 return colors[i]
             })
@@ -92,11 +92,10 @@ function worldSummary(){
             .append('text')
             .text(function(d,i){
                 return formatNumberWithComma(aggregation[i]);
-            })
-            .style('fill','white')
-            .attr('x', function(d,i){ return x(domain_array[i])})
-            .attr('y', function(d,i){ return y(aggregation[i])})
-            .style('font-size', 0.002*width + 'px');
-
+            });
+            //.style('fill','white')
+            //.attr('x', function(d,i){ return x(domain_array[i])})
+            //.attr('y', function(d,i){ return y(aggregation[i])})
+            //.style('font-size', 0.002*width + 'px');
     });
 }
