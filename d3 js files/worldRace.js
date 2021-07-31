@@ -53,7 +53,7 @@ function worldRace(all){
             .attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "end")
             .style('fill', 'white')
-            .style('stroke-width',0.5);
+            .style('stroke-width',1.0);
 
         // Add Y axis
         var y = d3.scaleLinear()
@@ -95,7 +95,7 @@ function worldRace(all){
             .style('fill','white')
             .attr('x', function(d,i){ return x(domain_array[i])})
             .attr('y', function(d,i){ return y(aggregation[i])})
-            .style('font-size', 0.02*width + 'px');
+            .style('font-size', 0.002*width + 'px');
 
     });
 }
