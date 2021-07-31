@@ -95,7 +95,7 @@ function worldRace(all){
             .style('fill','white')
             .attr('x', function(d,i){ return x(domain_array[i]) + 10})
             .attr('y', function(d,i){ return y(aggregation[i])})
-            .style('font-size', '0.5em');
+            .style('font-size', 0.05*width + 'px');
 
         svg.selectAll('body')
             .data(['text'])
@@ -108,7 +108,7 @@ function worldRace(all){
             .attr('x', width/12)
             .attr('y', 0.5*height)
             .style('fill','white')
-            .style('font-size', '4em');
+            .style('font-size', '8em');
         
 
     });
