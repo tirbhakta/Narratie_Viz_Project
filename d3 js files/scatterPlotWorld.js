@@ -66,10 +66,9 @@ function scatterPlotWorld(){
 	      .text("Total Confirmed Cases")
 
 	// Add the Scatterplot
-	  svg.selectAll(".dot")
+	  svg.selectAll("dot")
 	      .data(data)
 	    .enter().append("circle")
-	      .attr("class", "dot")
 	      .attr("r", 3.5)
 	      .attr("cx", function(d) { return x(d.location); })
 	      .attr("cy", function(d) { return y(d.total_confirmed); })
@@ -81,15 +80,7 @@ function scatterPlotWorld(){
                    })
                    .transition()
                    .style("opacity", 0.01)
-          })
-              .on("mouseout", function(d){
-               d3.selectAll('.dot')
-                .filter(function(dot){ 
-                 return (dot.type != d.type) 
-                })
-                .transition()
-                .style("opacity", 1)
-          });	
+          	})
 
 	});
 }
