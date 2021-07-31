@@ -9,9 +9,9 @@ function scatterPlotWorld(){
 	    height = 500 - margin.top - margin.bottom;
 
 	// Set the ranges
-	var x = d3.scale.linear()
+	var x = d3.scaleLinear()
 	    .range([0, width]);
-	var y = d3.scale.linear()
+	var y = d3.scaleLinear()
 	    .range([height, 0]);
 
 	var color = d3.scale.category10();
