@@ -1,3 +1,4 @@
+// function to calculate aggregrate of values from csv
 function aggregate(json_array){
     
 	var total_confirmed = 0
@@ -12,10 +13,12 @@ function aggregate(json_array){
 	return [total_confirmed, total_recovered, total_deaths, total_active];    
 }
 
+// function to format numbers with commas
 function formatNumberWithComma(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// function to generate the Line graph
 function worldSummary(){
 	
 	var margin = {top: 30, right: 30, bottom: 70, left: 160},
@@ -59,7 +62,7 @@ function worldSummary(){
 		svg.append("g")
 		.call(d3.axisLeft(y));
 
-        // Bars
+        // Line graphs
         svg.selectAll("myline")
         .data(aggregation)
         .enter()
