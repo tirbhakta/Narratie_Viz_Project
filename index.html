@@ -46,23 +46,10 @@
     <script>
 
 	// https://github.com/tirbhakta/Narrative_Viz_Project/blob/e31a339a05e4eb3ea739d72847a70238aab8a0d1/World_Covid_Data.csv
-	worldSummary();        
-	//scatterPlotWorld();
+	//worldSummary();        
+	scatterPlotWorld();
 	
 	
-	var w = window.innerWidth;
-	var h = window.innerHeight;
-	window.addEventListener("resize", function(event){
-		var new_w = window.innerWidth;
-		var new_h = window.innerHeight;
-
-		if( Math.abs(w*h - new_w*new_h) > 100000){                
-			//worldSummary();
-			//scatterPlotWorld();
-		}
-
-	});
-
 	function removeElementsByClass(className){
 		var elements = document.getElementsByClassName(className);
 		while(elements.length > 0){
