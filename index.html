@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="WorldMap.css">
     <link rel="stylesheet" href="bootStrap.css">
     <title>World Covid-19 Dashboard</title>
 </head>
@@ -24,10 +25,10 @@
             
             <div class = "col-md-1" style="min-width:60%; margin-left:15%; text-align:center;" id = "divBox">
                 <!-- Country-wise histogram node -->
-                <div class = 'card' style = 'height:49.9%;background : #2C2C2C;margin-bottom: 1.5%;' id = 'histogramDiv'>
+                <div class = 'card' style = 'height:49.9%;background : #2C2C2C;margin-bottom: 1.5%;' id = 'scatterplotDiv'>
                     <svg height =100% width="100%" id = "histogramNode" class = 'alpha'></svg>
                 </div>
-		<!-- World Statistics node -->
+				<!-- World Statistics node -->
                 <div class = 'card' style = 'height:50%; background : #2C2C2C;margin-bottom: 3%;' id = 'worldRaceDiv'>
                     <svg width="100%" height="100%" id = "worldRace" class = 'charlie'></svg>
                 </div>	
@@ -37,9 +38,9 @@
 	
     <script>
         
-	//first column
-	document.getElementById("histogramNode").style.height = (document.documentElement.scrollHeight * 0.468) + "px"
-	document.getElementById("worldRace").style.height = (document.documentElement.scrollHeight * 0.52) + "px"		
+		//first column
+		document.getElementById("histogramNode").style.height = (document.documentElement.scrollHeight * 0.468) + "px"
+		document.getElementById("worldRace").style.height = (document.documentElement.scrollHeight * 0.52) + "px"		
 
         if(document.documentElement.scrollHeight > document.documentElement.offsetWidth){
             document.getElementById("worldRace").style.height = (490) + "px"
@@ -55,30 +56,125 @@
     </script>
     <script>
 
-        //countryGraph('all');
-	worldRace('all');        
-        
-        var w = window.innerWidth;
-        var h = window.innerHeight;
-        window.addEventListener("resize", function(event){
-            var new_w = window.innerWidth;
-            var new_h = window.innerHeight;
+	// https://github.com/tirbhakta/Narrative_Viz_Project/blob/e31a339a05e4eb3ea739d72847a70238aab8a0d1/World_Covid_Data.csv
+	//worldRace('all');        
+	
+	
+	
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+	window.addEventListener("resize", function(event){
+		var new_w = window.innerWidth;
+		var new_h = window.innerHeight;
 
-            if( Math.abs(w*h - new_w*new_h) > 100000){                
-                worldRace('all');               
-                //countryGraph('all');
-            }
+		if( Math.abs(w*h - new_w*new_h) > 100000){                
+			worldRace('all');               
+			countryGraph('all');
+		}
 
-        });
+	});
 
-        function removeElementsByClass(className){
-            var elements = document.getElementsByClassName(className);
-            while(elements.length > 0){
-                elements[0].parentNode.removeChild(elements[0]);
-            }
-        }
+	function removeElementsByClass(className){
+		var elements = document.getElementsByClassName(className);
+		while(elements.length > 0){
+			elements[0].parentNode.removeChild(elements[0]);
+		}
+	}
 
-        //Setting height values 
+	// new graph
+	// Set the dimensions of the canvas / graph
+	var margin = {top: 50, right: 20, bottom: 30, left: 80},
+	    width = 940 - margin.left - margin.right,
+	    height = 500 - margin.top - margin.bottom;
+
+	// Set the ranges
+	var x = d3.scale.linear()
+	    .range([0, width]);
+	var y = d3.scale.linear()
+	    .range([height, 0]);
+
+	var color = d3.scale.category10();
+
+	// Define the axes
+	var xa = d3.svg.axis()
+	    .scale(x)
+	    .orient("bottom");
+
+	var ya = d3.svg.axis()
+	    .scale(y)
+	    .orient("left");
+
+	// Add the svg canvas
+	var svg = d3.select("#scatterplotDiv").append("svg")
+	    .attr("width", width + margin.left + margin.right)
+	    .attr("height", height + margin.top + margin.bottom)
+		.append("g")
+	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	// Read the data from csv
+	d3.csv("https://raw.githubusercontent.com/tylerwatkins101/cs498-visualization-project/master/data/epa2015_final.csv", function(error, data) {
+	  if (error) throw error;
+
+	  data.forEach(function(d) {
+	    d.total_confirmed = +d.total_confirmed;
+	    d.location = +d.location;
+	  });
+
+	// Scale the range of the data
+	  x.domain(d3.extent(data, function(d) { return d.location; })).nice();
+	  y.domain(d3.extent(data, function(d) { return d.total_confirmed; })).nice();
+
+	// Add the X-Axis
+	  svg.append("g")
+	      .attr("class", "x axis")
+	      .attr("transform", "translate(0," + height + ")")
+	      .call(xa)
+		  .append("text")
+	      .attr("class", "label")
+	      .attr("x", width)
+	      .attr("y", -6)
+	      .style("text-anchor", "end")
+	      .text("Country");
+
+	// Add the Y-Axis
+	  svg.append("g")
+	      .attr("class", "y axis")
+	      .call(ya)
+	    .append("text")
+	      .attr("class", "label")
+	      .attr("transform", "rotate(-90)")
+	      .attr("y", 6)
+	      .attr("dy", ".71em")
+	      .style("text-anchor", "end")
+	      .text("Total Confirmed Cases")
+
+	// Add the Scatterplot
+	  svg.selectAll(".dot")
+	      .data(data)
+	    .enter().append("circle")
+	      .attr("class", "dot")
+	      .attr("r", 3.5)
+	      .attr("cx", function(d) { return x(d.location); })
+	      .attr("cy", function(d) { return y(d.total_confirmed); })
+	      .style("fill", function(d) { return color(d.type); })
+	      .on("mouseover", function(d){
+        	  d3.selectAll('.dot')
+            	   .filter(function(dot){ 
+                    return (dot.type != d.type) 
+                   })
+                   .transition()
+                   .style("opacity", 0.01)
+          })
+              .on("mouseout", function(d){
+               d3.selectAll('.dot')
+                .filter(function(dot){ 
+                 return (dot.type != d.type) 
+                })
+                .transition()
+                .style("opacity", 1)
+          });	
+
+	});
     </script>
 
     <style>
