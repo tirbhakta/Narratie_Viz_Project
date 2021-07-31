@@ -60,9 +60,9 @@ function scatterPlotWorld(){
 	  
 		  // Add X axis
 	  	var x = d3.scaleLog()
-	    	.domain([10, 100000000])
+	    	.domain([100, 1000000000])
 	    	.range([ 0, width ])
-		.base(10);
+		.base(10).nice();
 	  	svg.append("g")
 	    	.attr("transform", "translate(0," + height + ")")
 	    	.call(d3.axisBottom(x))
@@ -70,7 +70,7 @@ function scatterPlotWorld(){
 
 	  	// Add Y axis
 	  	var y = d3.scaleLog()
-	    	.domain([10, 100000000])
+	    	.domain([100, 1000000000])
 	    	.range([ height, 0])
 		.base(10);
 	  	svg.append("g")
