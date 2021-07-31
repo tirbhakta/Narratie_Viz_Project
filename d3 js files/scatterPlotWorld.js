@@ -14,7 +14,7 @@ function scatterPlotWorld(){
 	var y = d3.scaleLinear()
 	    .range([height, 0]);
 
-	var color = d3.scale.category10();
+	var color = d3.scaleOrdinal(d3.schemeCategory10);
 
 	// Define the axes
 	var xa = d3.svg.axis()
