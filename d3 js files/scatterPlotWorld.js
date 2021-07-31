@@ -67,7 +67,7 @@ function scatterPlotWorld(){
 	      	.attr("cx", function (d) { return x(d.total_recovered); } )
 	      	.attr("cy", function (d) { return y(d.total_confirmed); } )
 	      	.attr("r", 4.5)
-	      	.style("fill", function(d) { return color(d); })		
+	      	.style("fill", function(d) { return color(d.location); })		
 		// Add label on mouse-hover
 		.on('mouseover', function (d, i) {
 			d3.select(this).transition()
