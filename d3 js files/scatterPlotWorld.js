@@ -56,7 +56,7 @@ function scatterPlotWorld(){
 			
 		// set color scale
 		//var color = d3.scaleOrdinal(d3.schemeCategory40);
-		var color = d3.scaleOrdinal().domain(d.location).range(d3.schemeSet3);
+		var color = d3.scaleOrdinal().domain(data).range(d3.schemeSet3);
 		
 		// Add dots
   		svg.append('g')
