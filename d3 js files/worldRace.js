@@ -18,12 +18,11 @@ function formatNumberWithComma(x) {
 
 function worldRace(all){
     //Using this selection to update the SVG everytime the function is called
-    //d3.selectAll('#worldRace').selectAll('*').remove()
+    d3.selectAll('#worldRace').selectAll('*').remove()
 
     d3.csv("https://raw.githubusercontent.com/tirbhakta/Narrative_Viz_Project/e31a339a05e4eb3ea739d72847a70238aab8a0d1/World_Covid_Data.csv", function(data) {
         
         var aggregation = aggregate(data)
-        console.log(aggregation)
 
         // set the dimensions and margins of the graph
         var margin = {top: 10, right: 30, bottom: 0, left: 30},
@@ -41,7 +40,7 @@ function worldRace(all){
 
         // X axis
         var domain_array = ['Confirmed Cases', 'Recovered Cases', 'Covid Deaths', 'Active Cases'];
-        var colors = ["rgb(171, 250, 98)", "rgb(251, 222, 89)", "rgb(151, 250, 162)", "rgb(138, 251, 201)"]
+        var colors = ["rgb(17, 167, 237)", "rgb(240, 247, 20)", "rgb(247, 20, 58)", "rgb(17, 237, 64)"]
         var x = d3.scaleBand()
             .range([ 0, width ])
             .domain(domain_array)
@@ -82,7 +81,7 @@ function worldRace(all){
         .append("circle")
             .attr("cx", function(d,i) { return x(domain_array[i]); })
             .attr("cy", function(d,i) { return y(aggregation[i]); })
-            .attr("r", "4")
+            .attr("r", "8")
             .style("fill", "#69b3a2")
             .attr("stroke", "black");
 
@@ -96,7 +95,7 @@ function worldRace(all){
             .style('fill','white')
             .attr('x', function(d,i){ return x(domain_array[i]) + 10})
             .attr('y', function(d,i){ return y(aggregation[i])})
-            .style('font-size', 0.05*width + 'px');
+            .style('font-size', 0.005*width + 'px');
 
         svg.selectAll('body')
             .data(['text'])
