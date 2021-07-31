@@ -4,7 +4,7 @@ function scatterPlotWorld(){
 
     // new graph
 	// Set the dimensions of the canvas / graph
-	var margin = {top: 10, right: 30, bottom: 40, left: 50},
+	var margin = {top: 2, right: 10, bottom: 40, left: 50},
 	    width = 520 - margin.left - margin.right,
 	    height = 520 - margin.top - margin.bottom;
 
