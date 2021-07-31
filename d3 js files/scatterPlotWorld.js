@@ -115,9 +115,6 @@ function scatterPlotWorld(){
 		  	div.html(d.location)
 		       .style("left", (d3.event.pageX + 10) + "px")
 		       .style("top", (d3.event.pageY - 15) + "px");
-			div.html(d.total_recovered)
-		       .style("left", (d3.event.pageX + 10) + "px")
-		       .style("top", (d3.event.pageY - 15) + "px");
 	     	})  
 		// add for mouse out
 		.on('mouseout', function (d, i) {
