@@ -1,3 +1,4 @@
+// function to generate random colors
 var randomColor = (function(){
   var golden_ratio = 0.618033988749895;
   var h = Math.random();
@@ -31,9 +32,9 @@ var randomColor = (function(){
     h %= 1;
     return hslToRgb(h, 0.5, 0.60);
   };
-
 })();
 
+// function to generate the Scatterplot graph
 function scatterPlotWorld(){
 
     // new graph
@@ -114,7 +115,8 @@ function scatterPlotWorld(){
 		  	div.html(d.location)
 		       .style("left", (d3.event.pageX + 10) + "px")
 		       .style("top", (d3.event.pageY - 15) + "px");
-	     	})     
+	     	})  
+		// add for mouse out
 		.on('mouseout', function (d, i) {
           		d3.select(this).transition()
 		       .duration('200')
