@@ -18,8 +18,8 @@ function formatNumberWithComma(x) {
 
 function worldSummary(){
 	
-	var margin = {top: 30, right: 30, bottom: 70, left: 60},
-    width = 460 - margin.left - margin.right,
+	var margin = {top: 30, right: 30, bottom: 70, left: 160},
+    width = 660 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 	// append the svg object to the body of the page
@@ -64,9 +64,9 @@ function worldSummary(){
         .data(aggregation)
         .enter()
         .append("rect")
-            .attr("x", function(d,i) { return x(domain_array[i]); })
+            .attr("x", function(d) { return x(domain_array); })
             //.attr("x2", function(d,i) { return x(domain_array[i]); })
-            .attr("y", function(d,i) { return y(aggregation[i]); })
+            .attr("y", function(d) { return y(aggregation); })
             //.attr("y2", y(0))
 		.attr("width", x.bandwidth())
 		.attr("height", function(d) { return height - y(d.Value); })
