@@ -1,5 +1,5 @@
 var randomColor = (function(){
-  var golden_ratio_conjugate = 0.618033988749895;
+  var golden_ratio = 0.618033988749895;
   var h = Math.random();
 
   var hslToRgb = function (h, s, l){
@@ -27,7 +27,7 @@ var randomColor = (function(){
       return '#'+Math.round(r * 255).toString(16)+Math.round(g * 255).toString(16)+Math.round(b * 255).toString(16);
   };
   return function(){
-    h += golden_ratio_conjugate;
+    h += golden_ratio;
     h %= 1;
     return hslToRgb(h, 0.5, 0.60);
   };
@@ -59,7 +59,7 @@ function scatterPlotWorld(){
 	  
 		  // Add X axis
 	  	var x = d3.scaleLog()
-	    	.domain([10, 999999999])
+	    	.domain([10, 100000000])
 	    	.range([ 0, width ]);
 	  	svg.append("g")
 	    	.attr("transform", "translate(0," + height + ")")
@@ -68,9 +68,8 @@ function scatterPlotWorld(){
 
 	  	// Add Y axis
 	  	var y = d3.scaleLog()
-	    	.domain([10, 999999999])
-	    	.range([ height, 0])
-			.nice();
+	    	.domain([10, 100000000])
+	    	.range([ height, 0]);
 	  	svg.append("g")
 	    	.call(d3.axisLeft(y))
 		.select(".domain").remove();
@@ -87,7 +86,7 @@ function scatterPlotWorld(){
 	      	.attr("text-anchor", "end")
 	      	.attr("transform", "rotate(-90)")
 	      	.attr("y", -margin.left + 20)
-	      	.attr("x", -margin.top - height/2 + 20)
+	      	.attr("x", -margin.top - height/2 + 5)
 	      	.text("Total Affected");
 			
 		// set color scale
@@ -102,7 +101,7 @@ function scatterPlotWorld(){
 	    	.append("circle")
 	      	.attr("cx", function (d) { return x(d.total_recovered); } )
 	      	.attr("cy", function (d) { return y(d.total_confirmed); } )
-	      	.attr("r", 4.5)
+	      	.attr("r", 5)
 	      	.style("fill", function(d) { return randomColor(); })		
 		// Add label on mouse-hover
 		.on('mouseover', function (d, i) {
