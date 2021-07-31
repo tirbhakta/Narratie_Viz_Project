@@ -96,6 +96,4 @@ function scatterPlotWorld(){
           });	
 
 	});
-    </script>
-
 }
