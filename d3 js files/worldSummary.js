@@ -63,14 +63,15 @@ function worldSummary(){
         svg.selectAll("mybar")
         .data(aggregation)
         .enter()
-        .append("rect")
-            .attr("x", function(d) { return x(domain_array); })
-            //.attr("x2", function(d,i) { return x(domain_array[i]); })
-            .attr("y", function(d) { return y(aggregation); })
-            //.attr("y2", y(0))
-		.attr("width", x.bandwidth())
-		.attr("height", function(d) { return height - y(d.Value); })
-            .attr("fill", "blue");
+        .append("line")
+            .attr("x1", function(d,i) { return x(domain_array[i]); })
+            .attr("x2", function(d,i) { return x(domain_array[i]); })
+            .attr("y1", function(d,i) { return y(aggregation[i]); })
+            .attr("y2", y(0))
+            .attr("stroke", function(d,i){
+                return colors[i]
+            })
+            .style('stroke-width', 10);
 
         // Circles
         svg.selectAll("mycircle")
