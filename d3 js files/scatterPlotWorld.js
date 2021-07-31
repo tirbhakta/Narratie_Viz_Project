@@ -46,7 +46,7 @@ function scatterPlotWorld(){
 	      	.attr("cx", function (d) { return x(d.total_recovered); } )
 	      	.attr("cy", function (d) { return y(d.total_confirmed); } )
 	      	.attr("r", 2.5)
-	      	.style("fill", function(d) { return color(d.type); })
+	      	.style("fill", function(d) { return color(d.location); })
 		
 	  });
 
