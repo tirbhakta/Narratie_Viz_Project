@@ -17,13 +17,9 @@ function scatterPlotWorld(){
 	var color = d3.scaleOrdinal(d3.schemeCategory10);
 
 	// Define the axes
-	var xa = d3.svg.axis()
-	    .scale(x)
-	    .orient("bottom");
+	var xa = d3.svg.axisBottom(x);
 
-	var ya = d3.svg.axis()
-	    .scale(y)
-	    .orient("left");
+	var ya = d3.svg.axisLeft(y);
 
 	// Add the svg canvas
 	var svg = d3.select("#scatterplotDiv").append("svg")
