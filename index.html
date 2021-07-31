@@ -35,18 +35,7 @@
         </div>        
     </div>
 	
-    <script>
-        
-	//first column
-	//document.getElementById("histogramNode").style.height = (document.documentElement.scrollHeight * 0.468) + "px"
-	document.getElementById("worldRace").style.height = (document.documentElement.scrollHeight * 0.52) + "px"		
-
-        if(document.documentElement.scrollHeight > document.documentElement.offsetWidth){
-            document.getElementById("worldRace").style.height = (490) + "px"
-        }
-
-    </script>
-
+    
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/queue.v1.min.js"></script>
     <script type="text/javascript" src="d3 js files/worldSummary.js"></script>
@@ -68,7 +57,7 @@
 		var new_h = window.innerHeight;
 
 		if( Math.abs(w*h - new_w*new_h) > 100000){                
-			worldSummary();
+			//worldSummary();
 			//scatterPlotWorld();
 		}
 
