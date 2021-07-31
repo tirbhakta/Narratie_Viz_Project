@@ -54,7 +54,7 @@ function worldSummary(){
             .style("text-anchor", "end")
             .style('fill', 'white')
             .style('stroke-width',1.0)
-	    .style('font-size','10px");
+	    .style('font-size',"10px");
 
         // Add Y axis
         var y = d3.scaleLinear()
