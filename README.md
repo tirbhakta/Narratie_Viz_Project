@@ -1,4 +1,4 @@
-# CS 416: Narrative Visualization project by Tirthankar Bhakta
+# CS 416: A Narrative Visualization project by Tirthankar Bhakta
 # Email: tbhakta2@illinois.edu
 # COVID-19 Dashboard Narrative Visualization
 
@@ -10,7 +10,7 @@ There is a link in the Dashboard that navigates to my Github repository where th
 The Dashboard consists of 2 graphs: 
 
 1. Country-wise Covid-19 Statistics ScatterPlot (Total Recovered versus Total Confirmed)
-2. Worlwide Covid-19 Summarized Line Graph (summarized parameters - Total Confirmed cases, Total Recovered, Total Deaths and Total Active Cases)
+2. Worldwide Covid-19 Summarized Line Graph (summarized parameters - Total Confirmed cases, Total Recovered, Total Deaths and Total Active Cases)
 
 
 ## Usage: 
