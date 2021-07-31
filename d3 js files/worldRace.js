@@ -97,19 +97,5 @@ function worldRace(all){
             .attr('y', function(d,i){ return y(aggregation[i])})
             .style('font-size', 0.05*width + 'px');
 
-        svg.selectAll('body')
-            .data(['text'])
-            .enter()
-            .append('text')
-            .text(function(d){
-                    return 'World COVID-19 Statistics'
-                }               
-            )
-            .attr('x', width/12)
-            .attr('y', 0.5*height)
-            .style('fill','white')
-            .style('font-size', '8em');
-        
-
     });
 }
