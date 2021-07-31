@@ -17,17 +17,28 @@ The Dashboard consists of 2 graphs:
 
 The dashboard has some functionalities:
 1. Country-wise Covid-19 Statistics ScatterPlot - 
+
    a) on mouse hover show the Country
+   
    b) X-axis denotes the Total Recovered Cases per country
+   
    c) Y-axis denotes the Total Confirmed Cases per Country
+   
    d) Random colors to distinguish each country
+   
 
 2. Covid-19 Summarized Line Graph - 
+
    a) Each parameter is displayed in a separate color
+   
    b) Aggregated values of Total Confirmed cases, Recovered, Deaths and Active across all countries
+   
    c) Y-axis displays the countries
+   
    d) X-axis displays the aggregated parameters in tick format
+   
    e) Static tooltip with a circle overlay showing the exact count for each parameter
+   
 
 ## Technical files: 
 ### D3.js files:
