@@ -80,7 +80,7 @@ function worldSummary(){
         .append("circle")
             .attr("cx", function(d,i) { return x(domain_array[i]); })
             .attr("cy", function(d,i) { return y(aggregation[i]); })
-            .attr("r", "8")
+            .attr("r", "4")
             .style("fill", "#69b3a2")
             .attr("stroke", "red");
 
